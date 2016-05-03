@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="styles.css">
+		<script>
+
+
+			document.addEventListener("DOMContentLoaded", createButton);
+
+			
+			function createButton() {
+				var myButton = document.createElement('button');
+				var myButtonText = document.createTextNode('Click Me');	
+						
+				myButton.appendChild(myButtonText);
+				
+				myButton.style.backgroundColor = '#BF5700';
+				myButton.style.height = '40px';
+				myButton.style.width = '100px';
+				myButton.style.fontSize = '20px';
+				myButton.style.marginLeft = '43%';
+				myButton.style.marginRight = '45%';
+				document.body.appendChild(myButton);
+				myButton.addEventListener("click",createSquare);
+			}
+			
+			
+			function createSquare() {
+				var mySquare = document.createElement('div');
+				var p = document.createElement("p");
+
+				mySquare.className = 'square';
+				mySquare.addEventListener("click",changeColor);
+				function changeColor() {
+  					function c() {
+  						  return Math.floor(Math.random()*256).toString(16)
+  					}
+				mySquare.style.backgroundColor = "#"+c()+c()+c();
+				}
+				mySquare.style.height = '99px';
+				mySquare.style.width = '99px';
+				mySquare.style.backgroundColor = 'black';
+				mySquare.style.margin = '5px';
+				mySquare.style.cssFloat = 'left';
+				mySquare.style.fontSize = '75px';
+				mySquare.style.fontWeight = 'bold';
+				mySquare.style.textAlign = 'center';
+				mySquare.style.paddingTop = '10px';
+
+				document.body.appendChild(p);
+				document.body.appendChild(mySquare);
+				
+				mySquare.id = document.getElementsByClassName('square').length;
+            	mySquare.addEventListener("mouseover", numberAppear);
+            	mySquare.addEventListener("mouseout", numberDisappear);
+            	mySquare.addEventListener("dblclick", removeElement);
+			}
+			
+
+			function numberAppear(e){
+				var square = e.target;
+				var t = document.createTextNode(square.id);
+				square.appendChild(t);
+				p.style.color = 'red';
+				p.style.fontSize = '20px';
+			}
+			
+			function numberDisappear(e){
+				var square = e.target;
+				square.firstChild.remove();
+			}
+
+			function removeElement(e) {
+    			var divIDNum = parseInt(e.target.id);
+    			if (divIDNum % 2 === 0) {
+        		 if(e.target.previousSibling === null){
+            	alert("He's dead, Jim.");
+        		}
+       	 		else {
+               		e.target.previousSibling.remove();
+        		}
+   			}
+   				else if (e.target.nextSibling === null){
+           		alert("There's nobody left on that side.");  
+   			}
+   				else {
+       			e.target.nextSibling.remove();
+   			}    
+		}
+
+
+				/*on doubleclick, use boolean and modulo to see if mySquareId is even.
+					If true, removeChild of next element with id > this element.
+					If false, removeChild of immediate prior element with id < this element.
+					If such elements do not exist (in array?) give alert that they do not exist.*/
+				
+			
+			
+		</script>
+	</head>
+	<body>
+		<!-- DO NOT ADD HTML HERE -->
+	</body>
+</html>
